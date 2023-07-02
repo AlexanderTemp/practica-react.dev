@@ -9,22 +9,21 @@ const TicTacToe = () => {
     console.log(id);
   };
   return (
-    <div>
+    <div className="min-h-screen flex justify-center items-center">
       {/* Tic tac toe section */}
-      <section className="flex flex-col border shadow-md">
-        <div className='flex justify-center'>
+      <section className="flex flex-col border justify-center items-center shadow-md">
+        <div className="flex justify-center">
           <h2>Turno de: X</h2>
         </div>
-        <div>
+        <div className="w-fit">
           {/* Componente Tic tac toe */}
-          <div>
-            {
-              arrayOfSquare?.map((elemm, key)=>(
-                <button key={key}>
-                  
-                </button>
-              ))
-            }
+          <div className=" grid grid-cols-3  grid-rows-3">
+            {arrayOfSquare?.map((elem, key) => (
+              <Square
+                key={key}
+                value={key}
+                handleClick={handleButtonClick}></Square>
+            ))}
           </div>
 
           {/* Historial de movimientos de movimientos */}
@@ -35,14 +34,24 @@ const TicTacToe = () => {
   );
 };
 
-interface buttonProps {
-  function: Function
-  
+interface squareProps {
+  value: number;
+  handleClick: Function;
 }
-const Button = () =>{
-  return <button>
-    
-  </button>
-}
+const Square = ({value, handleClick}: squareProps) => {
+  const [valor, setValor] = useState<string>('');
+
+  const handleInternalClick = () => {
+    setValor('X');
+  };
+
+  return (
+    <button
+      onClick={handleInternalClick}
+      className="py-3 px-4 border hover:bg-neutral-100 transition-all duration-150">
+      {valor}
+    </button>
+  );
+};
 
 export default TicTacToe;
